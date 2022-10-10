@@ -10,7 +10,7 @@ import { RootState } from "../store/store";
 
 const useTypeSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const TodoList = () => {
+const TodoList = () => {
   const todos = useTypeSelector(selectTodos);
   const dispatch = useDispatch();
 
@@ -29,3 +29,5 @@ export const TodoList = () => {
     </ul>
   )
 }
+
+export default TodoList;

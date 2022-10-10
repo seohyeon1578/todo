@@ -1,12 +1,14 @@
 import React from 'react';
-import { AddTodo } from './components/AddTodo';
-import { TodoList } from './components/TodoList';
+import AddTodo from './components/AddTodo';
+import Calender from './components/Calender';
+import TodoList from './components/TodoList';
 
 const App = () => {
   return (
     <div>
-      <AddTodo/>
-      <TodoList/>
+      {/* <AddTodo/>
+      <TodoList/> */}
+      <Calender/>
     </div>
   );
 }

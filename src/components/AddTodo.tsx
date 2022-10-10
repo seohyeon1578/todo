@@ -7,7 +7,7 @@ interface Inputs {
   text: string
 }
 
-export const AddTodo = () => {
+const AddTodo = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<Inputs>();;
   const dispatch = useDispatch();
 
@@ -28,3 +28,5 @@ export const AddTodo = () => {
     </form>
   );
 };
+
+export default AddTodo;
