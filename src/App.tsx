@@ -1,6 +1,6 @@
 import React from 'react';
 import AddTodo from './components/AddTodo';
-import Calender from './components/Calender';
+import Calender from './components/Calendar';
 import TodoList from './components/TodoList';
 
 const App = () => {
