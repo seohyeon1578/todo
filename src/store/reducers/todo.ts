@@ -15,8 +15,8 @@ const todoSlice = createSlice({
     },
     toggleItem: (state, action: PayloadAction<TodoId>) => {
       const index = state.list.findIndex(({ id }) => id === action.payload)
-
-      if(index) {
+      
+      if(index || index === 0) {
         state.list[index].isDone = !state.list[index].isDone;
       }
     }

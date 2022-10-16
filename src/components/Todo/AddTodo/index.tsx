@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addItem } from "../store/reducers/todo";
+import { addItem } from "../../../store/reducers/todo";
 
 interface Inputs {
   text: string

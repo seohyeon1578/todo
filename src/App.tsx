@@ -1,15 +1,27 @@
 import React from 'react';
-import AddTodo from './components/AddTodo';
+import styled from 'styled-components';
+import AddTodo from './components/Todo/AddTodo';
 import Calender from './components/Calendar';
-import TodoList from './components/TodoList';
+import TodoList from './components/Todo/TodoList';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
 
 const App = () => {
   return (
-    <div>
-      {/* <AddTodo/>
-      <TodoList/> */}
+    <Container>
       <Calender/>
-    </div>
+      <div>
+        <AddTodo/>
+        <TodoList/>
+      </div>
+    </Container>
   );
 }
 
