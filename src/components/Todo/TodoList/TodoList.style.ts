@@ -2,7 +2,24 @@ import styled from "styled-components";
 import CheckedIcon from "../../../assets/imgs/checked-icon.png";
 
 export const Container = styled.div`
-  height: auto;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: black;
+
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #DBDDDF;
+  }
   
   ul li {
     position: relative;
@@ -21,7 +38,9 @@ export const CheckBox= styled.input.attrs({ type: 'checkbox' })`
   display: none;
 
   :checked + label {
-    background: #DBDDDF;
+    background: url(${CheckedIcon}) black no-repeat center;
+    background-size: cover;
+    border-radius: 4px;
   }
 `;
 
@@ -33,8 +52,7 @@ export const CheckBoxLabel = styled.label`
   
   display: inline-block;
 
-  background: url(${CheckedIcon}) black no-repeat center;
-  background-size: cover;
+  background: #DBDDDF;
   border-radius: 4px;
 
   span {
@@ -42,5 +60,23 @@ export const CheckBoxLabel = styled.label`
     top: 50%;
     left: 32px;
     transform: translateY(-50%);
+  }
+`;
+
+export const OptionBtn = styled.button`
+  cursor: pointer;
+  
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+
+  background: none;
+  border: none;
+  outline: none;
+
+  img {
+    width: 16px;
+    height: 16px;
   }
 `;

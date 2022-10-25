@@ -1,31 +1,35 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { addItem } from "../../../store/reducers/todo";
+
+import PlusIcon from "../../../assets/imgs/plus_icon.png";
+import * as A from './AddTodo.style';
 
 interface Inputs {
   text: string
 }
 
 const AddTodo = () => {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<Inputs>();;
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<Inputs>();
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<Inputs> = ({ text }) => {
     dispatch(addItem({ id: Date.now().toString(), text, isDone: false }));
-    setValue("text", "")
-  }
+    setValue("text", "");
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input 
+    <A.Container onSubmit={handleSubmit(onSubmit)}>
+      <A.AddInput 
         type="text"
         placeholder="입력"
         {...register('text', {
-          required: true
+          required: "내용을 입력해주세요."
         })}
       />
-      <button type="submit">추가</button>
-    </form>
+      <A.AddBtn type="submit"><img src={PlusIcon} alt="추가"/></A.AddBtn>
+    </A.Container>
   );
 };
 

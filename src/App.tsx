@@ -13,14 +13,18 @@ const Container = styled.div`
   width: 100vw;
 `;
 
+const TodoWrap = styled.div`
+  width: 400px;
+`;
+
 const App = () => {
   return (
     <Container>
       <Calender/>
-      <div>
+      <TodoWrap>
         <AddTodo/>
         <TodoList/>
-      </div>
+      </TodoWrap>
     </Container>
   );
 }
