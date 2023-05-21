@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from 'react-router-dom';
 import GlobalStyle from './assets/styles/Global.style';
 
 const root = ReactDOM.createRoot(
@@ -11,10 +12,12 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <Provider store={store}>
-    <GlobalStyle />
-    <App />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <GlobalStyle />
+      <App />
+    </Provider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

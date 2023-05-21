@@ -1,21 +1,14 @@
 import React from "react";
-import {
-  useSelector,
-  useDispatch,
-  TypedUseSelectorHook
-} from "react-redux";
 
 import { selectTodos, toggleItem } from "../../../store/reducers/todo";
-import { RootState } from "../../../store/store";
 
 import OptionIcon from "../../../assets/imgs/option_icon.png";
 import * as L from "./TodoList.style";
-
-const useTypeSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 const TodoList = () => {
-  const todos = useTypeSelector(selectTodos);
-  const dispatch = useDispatch();
+  const todos = useAppSelector(selectTodos);
+  const dispatch = useAppDispatch();
   return(
     <L.Container>
       <ul>
