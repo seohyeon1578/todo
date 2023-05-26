@@ -1,12 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import todoReducers from "./reducers/todo"
 import userReducers from "./reducers/user"
 
+const reducers = combineReducers({
+  todo: todoReducers,
+  user: userReducers
+})
+
 export const store = configureStore ({
-  reducer: {
-    todo: todoReducers,
-    user: userReducers,
-  }
+  reducer: reducers
 });
 
 export type RootState = ReturnType<typeof store.getState>

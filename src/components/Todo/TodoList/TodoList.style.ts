@@ -55,7 +55,7 @@ export const CheckBoxLabel = styled.label`
   background: #DBDDDF;
   border-radius: 4px;
 
-  span {
+  span, input {
     position: absolute;
     top: 50%;
     left: 32px;
@@ -78,5 +78,57 @@ export const OptionBtn = styled.button`
   img {
     width: 16px;
     height: 16px;
+  }
+`;
+
+export const todoModal = styled.div`
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  h4 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  div {
+    display: flex;
+  }
+
+  div button {
+    width: 160px;
+    height: 60px;
+
+    box-sizing: border-box;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+
+    color: red;
+  }
+
+  div button:first-child {
+    margin-right: 15px;
+    color: rgb(24,90,188);
+  }
+`;
+
+export const Input = styled.input`
+  width: 336px;
+  
+  margin-right: 12px;
+  padding-bottom: 4px;
+
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid black;
+
+  :focus-visible {
+    outline: none;
   }
 `;

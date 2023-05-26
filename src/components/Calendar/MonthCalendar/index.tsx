@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { changeDate, currentDateTodos } from "../../../store/reducers/todo";
 import * as C  from "../Calendar.style";
 
 const MonthCalendar = (
@@ -8,6 +10,8 @@ const MonthCalendar = (
   { days:dayjs.Dayjs, setDays: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>, date: string[], changeToggle: () => void }
   ) => {
   const changeDays = (time: number) => setDays(dayjs(days.add(time, "month")));
+  const currentDate = useAppSelector(currentDateTodos);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -24,11 +28,20 @@ const MonthCalendar = (
           <C.CalendarStair key={idx}>{v}</C.CalendarStair>
         ))}
         {date.slice(0, date.indexOf(dayjs(days.format('YYYY-MM')).format("ddd"))).map((v, idx) => (
-          <C.CalendarStair key={idx}></C.CalendarStair>
+          <C.CalendarStair key={idx} ></C.CalendarStair>
         ))}
         {new Array(Number(days.daysInMonth())).fill(1).map((v, idx) => (
           <C.CalendarStair
             key={idx}
+            onClick={
+              () => dispatch(changeDate(dayjs(`${days.get('year')}-${days.get('month') + 1}-${idx+1}`, 'YYYY-MM-DD').format()))} 
+            currentDate={
+              dayjs(currentDate).get('year') === days.get("year")
+              &&
+              dayjs(currentDate).get("month") === days.get("month")
+              &&
+              dayjs(currentDate).get("date") === idx+1
+            }
           >
             {idx + 1}
           </C.CalendarStair>

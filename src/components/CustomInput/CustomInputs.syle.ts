@@ -28,7 +28,7 @@ export const InputLabel = styled.label<{
   width: 16px;
   height: 16px;
 
-  background-image: url(${({ htmlFor}) => htmlFor === "id" ? Image: Image2});
+  background-image: url(${({ htmlFor}) => htmlFor === "email" || htmlFor === "username" ? Image: Image2});
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

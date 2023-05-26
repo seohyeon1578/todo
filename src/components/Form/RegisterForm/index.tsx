@@ -6,11 +6,18 @@ import CustomInput from "../../CustomInput";
 import { yupResolver } from "@hookform/resolvers/yup"
 import { object, string, ref } from "yup";
 import { ErrorMsg } from "../form.style";
+import { useAppDispatch } from "../../../store/hooks";
+import { registerUser } from "../../../store/actions/userAction";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 const RegisterForm = () => {
   const formSchema = object({
-    id: string()
-      .required('아이디를 입력해주세요.'),
+    email: string()
+      .required('이메일을 입력해주세요.')
+      .email('이메일 형식에 맞지 않습니다.'),
+    username: string()
+      .required('이름을 입력해주세요.'),
     password: string()
       .required('비밀번호를 입력해주세요.')
       .min(8, '최소 8자 이상 가능합니다.')
@@ -32,9 +39,11 @@ const RegisterForm = () => {
     resolver: yupResolver(formSchema)
   });
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IAuth> = ({ id, password }) => {
+  const onSubmit: SubmitHandler<IAuth> = ({ email, username, password }) => {
+    dispatch(registerUser({ email, username, password }))
     navigate('/login');
   }
   
@@ -42,11 +51,18 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <CustomInput
         type="text"
-        name="id"
-        label="아이디"
+        name="email"
+        label="이메일"
         register={register}
       />
-      <ErrorMsg>{errors.id && errors.id.message}</ErrorMsg>
+      <ErrorMsg>{errors.email && errors.email.message}</ErrorMsg>
+      <CustomInput
+        type="username"
+        name="username"
+        label="이름"
+        register={register}
+      />
+      <ErrorMsg>{errors.username && errors.username.message}</ErrorMsg>
       <CustomInput
         type="password"
         name="password"
@@ -55,7 +71,7 @@ const RegisterForm = () => {
       />
       <ErrorMsg>{errors.password && errors.password.message}</ErrorMsg>
       <CustomInput
-        type="passwordConfirm"
+        type="password"
         name="passwordConfirm"
         label="비밀번호 확인"
         register={register}

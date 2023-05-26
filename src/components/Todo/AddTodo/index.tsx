@@ -1,22 +1,22 @@
-import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { addItem } from "../../../store/reducers/todo";
+import { addItem, currentDateTodos } from "../../../store/reducers/todo";
 
 import PlusIcon from "../../../assets/imgs/plus_icon.png";
 import * as A from './AddTodo.style';
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 interface Inputs {
-  text: string
+  title: string
 }
 
 const AddTodo = () => {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<Inputs>();
+  const currentDate = useAppSelector(currentDateTodos);
   const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<Inputs> = ({ text }) => {
-    dispatch(addItem({ id: Date.now().toString(), text, isDone: false }));
-    setValue("text", "");
+  const onSubmit: SubmitHandler<Inputs> = ({ title }) => {
+    dispatch(addItem({ id: Date.now().toString(), title, date: currentDate, isDone: false, isEdit: false }));
+    setValue("title", "");
   };
 
   return (
@@ -24,7 +24,7 @@ const AddTodo = () => {
       <A.AddInput 
         type="text"
         placeholder="입력"
-        {...register('text', {
+        {...register('title', {
           required: "내용을 입력해주세요."
         })}
       />

@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "../actions/userAction";
+import { loginUser, registerUser } from "../actions/userAction";
 
 const initialState = {
   loading: "",
-  isLogin: false
+  accessToken: "",
+  isLoggedIn: false,
+  error: {}
 }
 
 const userSlice = createSlice({
@@ -11,7 +13,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.isLogin = false
+      state.accessToken = ""
+      state.isLoggedIn = false
     }
   },
   extraReducers: (builder) => {
@@ -19,12 +22,24 @@ const userSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.loading = "pending"
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.loading = "success"
-        state.isLogin = true
+        state.accessToken = payload.access_token
+        state.isLoggedIn = true
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state, { payload }) => {
         state.loading = "failed"
+        if(payload) state.error = payload
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = "pending"
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.loading = "success"
+      })
+      .addCase(registerUser.rejected, (state, { payload }) => {
+        state.loading = "failed"
+        if(payload) state.error = payload
       })
   }
 }) 

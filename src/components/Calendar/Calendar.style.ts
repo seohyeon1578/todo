@@ -61,7 +61,9 @@ export const CalenderUI = styled.div`
   flex-wrap: wrap;
 `;
 
-export const CalendarStair = styled.div`
+export const CalendarStair = styled.div<{
+  currentDate?: boolean
+}>`
   width: 57.156248px;
   height: 57.156248px;
   margin: 0;
@@ -69,4 +71,8 @@ export const CalendarStair = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  background-color: ${props => props.currentDate ? "rgb(210,227,252)" : null};
+  color: ${props => props.currentDate ? "rgb(24,90,188)" : null};
+  border-radius: 50%;
 `;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import dayjs from "dayjs";
 import * as C  from "../Calendar.style";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { changeDate, currentDateTodos } from "../../../store/reducers/todo";
 
 const WeekCalendar = (
   { days, setDays, date, changeToggle } 
@@ -9,6 +11,9 @@ const WeekCalendar = (
   ) => {
   const [week, setWeek] = useState<number[]>([]);
   const [weekNumber, setWeekNumber] = useState(1);
+
+  const currentDate = useAppSelector(currentDateTodos);
+  const dispatch = useAppDispatch();
 
   const changeWeeks = (time: number) => setDays(dayjs(days.add(time, "week")));
 
@@ -39,7 +44,6 @@ const WeekCalendar = (
     const number = Math.floor(getWeekNumber());
     setWeekNumber(number);
   }, [getWeekNumber])
-
   return (
     <>
       <C.Header>
@@ -55,7 +59,16 @@ const WeekCalendar = (
             <C.CalendarStair key={idx}>{v}</C.CalendarStair>
         ))}
         {week.map((v, idx) => (
-          <C.CalendarStair key={idx}>{v}</C.CalendarStair>
+          <C.CalendarStair key={idx} 
+            onClick={
+              () => dispatch(changeDate(dayjs(`${days.get('year')}-${days.get('month') + 1}-${v}`, 'YYYY-MM-DD').format()))} 
+            currentDate={
+              dayjs(currentDate).get('year') === days.get("year")
+              &&
+              dayjs(currentDate).get("month") === days.get("month")
+              &&
+              dayjs(currentDate).get("date") === v
+          }>{v}</C.CalendarStair>
         ))}
       </C.CalenderUI>
     </>

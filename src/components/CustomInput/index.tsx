@@ -3,7 +3,7 @@ import { IAuth } from "../../interfaces/Auth"
 import { Input, InputContainer, InputLabel } from "./CustomInputs.syle"
 
 interface InputProps {
-  name: "id" | "password" | "passwordConfirm"
+  name: "email" | "username" | "password" | "passwordConfirm"
   label: string
   register: UseFormRegister<IAuth>
   type: string
